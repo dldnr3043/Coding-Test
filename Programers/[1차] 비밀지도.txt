@@ -1,0 +1,53 @@
+def solution(array, commands):
+    answer = []
+    
+    for i in range(0, len(commands)) :
+        temp = sorted(array[commands[i][0]-1:commands[i][1]])
+        answer.append(temp[commands[i][2]-1])#include <string>
+#include <vector>
+#include <bitset>
+
+using namespace std;
+
+vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
+    vector<string> answer;
+    vector<vector<int>> map1;
+    vector<vector<int>> map2;
+    vector<int> in, in2;
+    
+    string ans;
+    
+    bitset<16> bb, bb2;
+    
+    for(int i=0;i<n;i++) {
+        in.clear();
+        in2.clear();
+        
+        bb = bitset<16>(arr1[i]);
+        bb2 = bitset<16>(arr2[i]);
+        
+        for(int j=n-1;j>=0;j--) {
+            in.push_back(bb[j]);
+            in2.push_back(bb2[j]);
+        }
+            
+        map1.push_back(in);
+        map2.push_back(in2);
+    }
+    
+    for(int i=0;i<map1.size();i++) {
+        for(int j=0;j<map1[i].size();j++) {
+            if(map1[i][j] == 0 && map2[i][j] == 0)
+                ans += " ";
+            else if(map1[i][j] == 1 || map2[i][j] == 1)
+                ans += "#";
+        }
+        answer.push_back(ans);
+        ans = "";
+    }
+    
+    return answer;
+}
+        i = i+1
+    
+    return answer

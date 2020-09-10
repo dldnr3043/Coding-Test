@@ -1,0 +1,80 @@
+#include <string>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int solution(string str1, string str2) {
+    int answer = 0;
+    vector<string> STR1, STR2;
+    string in;
+    int count, size1, size2;
+    
+    size1 = 0;
+    size2 = 0;
+    
+    double ans;
+    
+    // str1, str2를 다중집합 원소로 만들기
+    // str1부터
+    for(int i=0;i<str1.size()-1;i++) {
+        count = 0;
+        in = "";
+        
+        in += str1[i];
+        in += str1[i+1];
+        
+        // in에 저장된 두 개의 문자가 영문자인지 확인 후 집합에 넣을지 결정
+        for(int j=0;j<2;j++) {
+            if((in[j] >= 'a' && in[j] <= 'z') || (in[j] >= 'A' && in[j] <= 'Z')) {
+                count++;
+                in[j] = toupper(in[j]);
+            }
+        }
+        
+        if(count == 2)
+            STR1.push_back(in);
+    }
+    
+    // str2
+    for(int i=0;i<str2.size()-1;i++) {
+        count = 0;
+        in = "";
+        
+        in += str2[i];
+        in += str2[i+1];
+        
+        // in에 저장된 두 개의 문자가 영문자인지 확인 후 집합에 넣을지 결정
+        for(int j=0;j<2;j++) {
+            if((in[j] >= 'a' && in[j] <= 'z') || (in[j] >= 'A' && in[j] <= 'Z')) {
+                count++;
+                in[j] = toupper(in[j]);
+            }
+        }
+        
+        if(count == 2)
+            STR2.push_back(in);
+    }
+    
+    // 교집합 원소 개수 구하기
+    for(int i=0;i<STR1.size();i++) {
+        for(int j=0;j<STR2.size();j++) {
+            if(STR1[i] == STR2[j]) {
+                size1++;
+                STR2[j] = "0";
+                break;
+            }
+        }
+    }
+    
+    // 합집합 원소 개수 구하기
+    size2 = STR1.size() + STR2.size() - size1;
+    
+    // answer 구하기
+    if(size1 == 0 && size2 == 0) answer = 65536;
+    else {
+        answer = ((double)size1/size2 * 65536);
+    }
+    
+    return answer;
+}

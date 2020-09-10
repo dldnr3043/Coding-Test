@@ -1,0 +1,47 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(string s) {
+    
+    int answer = s.length();
+    
+    for(int i=1;i<=s.length()/2;i++) {
+        int count = 1;
+        string cmp = s.substr(0, i);
+        string str;
+        
+        for(int j=i;j<s.length();j+=i) {
+            string tmp = s.substr(j, i);
+            
+            if(cmp.compare(tmp) == 0) // cmp same the tmp.
+                count++;
+            else { // cmp & tmp aren't the same
+                if(count == 1) {
+                    str += cmp;
+                    cmp = tmp;
+                }
+                else {
+                    str += to_string(count) + cmp;
+                    cmp = tmp;
+                    count = 1;
+                }
+            }
+            
+            if(j+i >= s.length()) {
+                if(count == 1) {
+                    str += cmp;
+                }
+                    
+                else {
+                    str += to_string(count) + cmp;
+                }
+            }
+            
+        } // second for
+        answer = (answer > str.length()) ? str.length() : answer;
+    } // first for
+    
+    return answer;
+}

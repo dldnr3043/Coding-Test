@@ -1,0 +1,60 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+string transform(int number, int n) {
+
+	string result;
+
+	number *= n;
+    
+    if (number == 0) return "0";
+
+	for (;number /= n;) {
+		if (number%n == 10) result += 'A';
+		else if (number%n == 11) result += 'B';
+		else if (number%n == 12) result += 'C';
+		else if (number%n == 13) result += 'D';
+		else if (number%n == 14) result += 'E';
+		else if (number%n == 15) result += 'F';
+		else result += to_string(number%n);
+	}
+
+	reverse(result.begin(), result.end());
+		
+	return result;
+
+}
+
+string solution(int n, int t, int m, int p) {
+    string answer = "";
+    string entire = "";
+    string tok = "";
+    
+    int i = 0;
+    
+    while(1) {
+        entire += transform(i, n);
+        
+        if(entire.length() >= t*m) break;
+        
+        i++;
+    }
+    
+    for(int i=0;i<entire.length();i++) {
+        if(m == p) p = 0;
+        if((i+1)%m == p) {
+            t--;
+            if(t == -1) break;
+            answer += entire[i];
+        }
+            
+    }
+    
+    
+    
+    return answer;
+}

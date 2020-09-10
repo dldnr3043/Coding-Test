@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    
+    int *a = new int[T];
+    int *b = new int[T];
+    int *ab = new int[T];
+    
+    for(int i=0;i<T;i++)
+        scanf("%d %d", &a[i], &b[i]);
+
+	for(int i=0;i<T;i++) ab[i] = 1;
+    
+    for(int i=0;i<T;i++) {
+        for(int j=0;j<b[i];j++) {
+			ab[i] *= a[i];
+			if(ab[i] >= 10) ab[i] = ab[i] % 10;
+		}
+    }
+    
+    for(int i=0;i<T;i++) {
+		if(ab[i] % 10 == 0)
+			ab[i] = 10;
+		printf("%d\n", ab[i]);
+	}
+
+    
+	getchar();
+	getchar();
+
+    return 0;
+}

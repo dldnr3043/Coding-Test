@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <cmath>
+int main() {
+	int T;
+	scanf("%d", &T);
+	int *x = new int[T];
+	int *y = new int[T];
+	int *r = new int[T];
+	int *x2 = new int[T];
+	int *y2 = new int[T];
+	int *r2 = new int[T];
+	double *temp = new double[T];
+	for (int i = 0;i < T;i++) {
+		scanf("%d %d %d %d %d %d", &x[i], &y[i], &r[i], &x2[i], &y2[i], &r2[i]);
+	}
+	for (int j = 0;j < T;j++) {
+		temp[j] = sqrt(pow(x[j] - x2[j], 2) + pow(y[j] - y2[j], 2));
+		if (x[j] == x2[j] && y[j] == y2[j] && r[j] == r2[j])
+			printf("-1\n");
+		else if (temp[j] > r[j] + r2[j] || temp[j] < abs(r[j] - r2[j]))
+			printf("0\n");
+		else if (temp[j] == r[j] + r2[j] || temp[j] == abs(r[j] - r2[j]))
+			printf("1\n");
+		else
+			printf("2\n");
+	}
+	return 0;
+}

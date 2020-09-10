@@ -1,0 +1,31 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(vector<int> answers) {
+	vector<int> answer;
+
+	int test1[5] = {1, 2, 3, 4, 5};
+    int test2[8] = {2, 1, 2, 3, 2, 4, 2, 5};
+    int test3[10] = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+
+	int ans[3] = { 0, 0, 0 };
+
+	for(int i=0;i<answers.size();i++) {
+        if(answers[i] == test1[i % 5]) ans[0]++;
+        if(answers[i] == test2[i % 8]) ans[1]++;
+        if(answers[i] == test3[i % 10]) ans[2]++;
+    }
+    
+    int max = -1;
+    
+    for(int i=0;i<3;i++)
+        if(max < ans[i])
+            max = ans[i];
+    
+    for(int i=0;i<3;i++)
+        if(ans[i] == max) answer.push_back(i+1);
+    
+	return answer;
+}

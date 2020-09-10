@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int a,b;
+        Scanner scan = new Scanner(System.in);
+        
+        a = scan.nextInt();
+        b = scan.nextInt();
+        
+        if(a < b) System.out.println("<");
+        else if(a > b) System.out.println(">");
+        else System.out.println("==");
+    }
+}
+    
+#include <stdio.h>
+
+int main() {
+    int a,b;
+    
+    scanf("%d %d", &a, &b);
+    
+    if(a < b) printf("<");
+    else if(a > b) printf(">");
+    else printf("==");
+    
+    return 0;
+}

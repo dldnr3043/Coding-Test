@@ -1,0 +1,51 @@
+#include <string>
+#include <vector>
+#include <sstream>
+#include <map>
+
+using namespace std;
+
+vector<string> solution(vector<string> record) {
+	vector<string> answer;
+    vector<string> uid;
+    
+    map<string, string> m;
+    
+    stringstream ss;
+    
+    string activity, id, name;
+    
+    for(int i=0;i<record.size();i++) {
+        ss.clear();
+        
+        ss.str(record[i]);
+        
+        ss >> activity;
+        
+        if(activity == "Enter") {
+            ss >> id;
+            ss >> name;
+            
+            answer.push_back("님이 들어왔습니다.");
+            uid.push_back(id);
+            m[id] = name;
+        }
+        else if(activity == "Leave") {
+            ss >> id;
+            
+            answer.push_back("님이 나갔습니다.");
+            uid.push_back(id);
+        }
+        else {
+            ss >> id;
+            ss >> name;
+            
+            m[id] = name;
+        }
+    }
+    
+    for(int i=0;i<answer.size();i++) 
+        answer[i] = m[uid[i]] + answer[i];
+
+	return answer;
+}

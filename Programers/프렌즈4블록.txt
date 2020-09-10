@@ -1,0 +1,68 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int solution(int m, int n, vector<string> board) {
+    int answer = 0;
+    int count = 0;
+    bool recycle = false;
+    
+    vector<string> vboard;
+    
+    while(1) {
+        recycle = false;
+        vboard.clear();
+        vboard.assign(board.begin(), board.end());
+        
+        for(int i=0;i<m-1;i++) {
+            for(int j=0;j<n-1;j++) {
+                if(board[i][j] == '0') continue;
+                if(board[i][j] == board[i][j + 1] && board[i][j] == board[i + 1][j] && board[i][j] == board[i + 1][j + 1]) {
+                    recycle = true;
+                    break;
+                }
+            }
+        }
+        
+        if(recycle == false) break;
+        
+        for(int i=0;i<m-1;i++) {
+            for(int j=0;j<n-1;j++) {
+                if(board[i][j] == '0') continue;
+                if(board[i][j] == board[i][j + 1] && board[i][j] == board[i + 1][j] && board[i][j] == board[i + 1][j + 1]) {
+                    vboard[i][j] = '0';
+                    vboard[i][j+1] = '0';
+                    vboard[i+1][j] = '0';
+                    vboard[i+1][j+1] = '0';
+                }
+            }
+        }
+        
+        for(int i=m-1;i>=2;i--) {
+            for(int j=0;j<n;j++) {
+                if(vboard[i][j] != '0' && vboard[i-1][j] == '0') {
+                    for(int k=i-1;k>=1;k--) {
+                        if(vboard[k][j] == '0') count++;
+                        if(vboard[k-1][j] != '0') {
+                            vboard[i-1][j] = vboard[k-1][j];
+                            vboard[k-1][j] = '0';
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        board.clear();
+        board.assign(vboard.begin(), vboard.end());
+    }
+    
+    for(int i=0;i<m;i++) {
+        for(int j=0;j<n;j++)
+            if(vboard[i][j] == '0') answer++;
+    }
+    
+    return answer;
+}
