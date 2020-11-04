@@ -1,0 +1,18 @@
+class Solution {
+    public int solution(int[] numbers, int target) {
+        int answer = 0;
+        
+        answer = dfs(0, 0, target, numbers);
+        
+        return answer;
+    }
+    
+    public int dfs(int depth, int sum, int target, int[] node) {
+        if(depth == node.length) {
+            return (sum == target) ? 1 : 0;
+        }
+            
+        return dfs(depth+1, sum+node[depth], target, node) +
+                dfs(depth+1, sum-node[depth], target, node);
+    }
+}
