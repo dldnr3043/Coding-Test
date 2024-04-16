@@ -38,22 +38,20 @@ public class Main {
         q.add(new int[]{0,0});
 
         while(!q.isEmpty()) {
-            int now[] = q.poll();
-            int nowX = now[0];
-            int nowY = now[1];
+            int[] temp = q.poll();
+            int currentX = temp[0];
+            int currentY = temp[1];
 
             for(int i=0;i<4;i++) {
-                int nextX = nowX + flagX[i];
-                int nextY = nowY + flagY[i];
+                int nextX = currentX + flagX[i];
+                int nextY = currentY + flagY[i];
 
-                if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m)
-                    continue;
-                if (visited[nextX][nextY] || map[nextX][nextY] == 0)
-                    continue;
+                if(nextX < 0 || nextY < 0 || nextX >= m || nextY >= n) continue;
+                if(visited[nextY][nextX] || map[nextY][nextX] == 0) continue;
 
-                q.add(new int[] {nextX, nextY});
-                map[nextX][nextY] = map[nowX][nowY] + 1;
-                visited[nextX][nextY] = true;
+                q.add(new int[]{nextX, nextY});
+                map[nextY][nextX] = map[currentY][currentX] + 1;
+                visited[nextY][nextX] = true;
             }
         }
     }
