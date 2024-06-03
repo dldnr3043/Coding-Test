@@ -64,7 +64,6 @@ public class Main {
             }
         }
 
-        if(ans == 1) return 0;
-        else return ans - 1;
+        return ans - 1;
     }
 }
